@@ -26,7 +26,7 @@ export const CartProductInlineForm = ({product, addProduct, setEditMode}) => {
                         {`${product.name} (${product.price})€`}
                     </Col>
                     <Col xs="3">
-                        <Field className="mw-100" type="number" name="quantity" />
+                        <Field className="mw-100 form-control text-center" type="number" name="quantity" />
                     </Col>
                     <Col xs="2">
                         <Button variant="success" type="submit"><CheckCircleFill /></Button>

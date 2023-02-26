@@ -1,5 +1,5 @@
 import { Field, Form, Formik } from "formik"
-import { Alert, Button, ListGroupItem } from "react-bootstrap"
+import { Alert, Button, Col, ListGroupItem, Row } from "react-bootstrap"
 import { CheckCircleFill } from "react-bootstrap-icons"
 import { checkoutClientValidator } from "../../validators/checkoutClientValidator"
 
@@ -26,37 +26,95 @@ export const CheckoutClientForm = ({client, saveClient, setEditMode}) => {
         <Form>
             <ListGroupItem>
                 {(errors.name && touched.name) && <Alert variant="danger">{errors.name}</Alert>}
-                <strong>Nombre:</strong> <Field type="text" name="name" />
+                <Row>
+                    <Col xs="4">
+                        <strong>Nombre:</strong>
+                    </Col>
+                    <Col xs="8">
+                        <Field type="text" name="name" className="form-control" />
+                    </Col>
+                </Row>
             </ListGroupItem>
             <ListGroupItem>
                 {(errors.street && touched.street) && <Alert variant="danger">{errors.street}</Alert>}
-                <strong>Calle:</strong> <Field type="text" name="street" />
+                <Row>
+                    <Col xs="4">
+                        <strong>Calle:</strong>
+                    </Col>
+                    <Col xs="8">
+                        <Field type="text" name="street" className="form-control" />
+                    </Col>
+                </Row>
             </ListGroupItem>
             <ListGroupItem>
                 {(errors.number && touched.number) && <Alert variant="danger">{errors.number}</Alert>}
-                <strong>Número:</strong> <Field type="number" name="number" />
+                <Row>
+                    <Col xs="4">
+                        <strong>Número:</strong>
+                    </Col>
+                    <Col xs="8">
+                        <Field type="number" name="number" className="form-control" />
+                    </Col>
+                </Row>
             </ListGroupItem>
             <ListGroupItem>
                 {(errors.postal_code && touched.postal_code) && <Alert variant="danger">{errors.postal_code}</Alert>}
-                <strong>C. Postal:</strong> <Field type="number" name="postal_code" />
+                <Row>
+                    <Col xs="4">
+                        <strong>C. Postal:</strong>
+                    </Col>
+                    <Col xs="8">
+                        <Field type="number" name="postal_code" className="form-control" />
+                    </Col>
+                </Row>
             </ListGroupItem>
             <ListGroupItem>
                 {(errors.city && touched.city) && <Alert variant="danger">{errors.city}</Alert>}
-                <strong>Ciudad:</strong> <Field type="text" name="city" />
+                <Row>
+                    <Col xs="4">
+                        <strong>Ciudad:</strong>
+                    </Col>
+                    <Col xs="8">
+                        <Field type="text" name="city" className="form-control" />
+                    </Col>
+                </Row>
             </ListGroupItem>
             <ListGroupItem>
                 {(errors.province && touched.province) && <Alert variant="danger">{errors.province}</Alert>}
-                <strong>Provincia:</strong> <Field type="text" name="province" />
+                <Row>
+                    <Col xs="4">
+                        <strong>Provincia:</strong>
+                    </Col>
+                    <Col xs="8">
+                        <Field type="text" name="province" className="form-control" />
+                    </Col>
+                </Row>
             </ListGroupItem>
             <ListGroupItem>
                 {(errors.country && touched.country) && <Alert variant="danger">{errors.country}</Alert>}
-                <strong>País:</strong> <Field type="text" name="country" />
+                <Row>
+                    <Col xs="4">
+                        <strong>País:</strong>
+                    </Col>
+                    <Col xs="8">
+                        <Field type="text" name="country" className="form-control" />
+                    </Col>
+                </Row>
             </ListGroupItem>
             <ListGroupItem>
                 {(errors.email && touched.email) && <Alert variant="danger">{errors.email}</Alert>}
-                <strong>Email:</strong> <Field type="text" name="email" />
+                <Row>
+                    <Col xs="4">
+                        <strong>Email:</strong>
+                    </Col>
+                    <Col xs="8">
+                        <Field type="text" name="email" className="form-control" />
+                    </Col>
+                </Row>
             </ListGroupItem>
-            <Button variant="success" type="submit"><CheckCircleFill /> Guardar</Button>
+            <ListGroupItem className="text-center">
+                <Button variant="success" type="submit"><CheckCircleFill /> Guardar</Button>
+            </ListGroupItem>
         </Form>
         )}
         </Formik>

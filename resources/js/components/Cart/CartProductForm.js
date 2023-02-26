@@ -1,5 +1,5 @@
 import { Field, Form, Formik } from "formik"
-import { Button } from "react-bootstrap"
+import { Button, Col, Row } from "react-bootstrap"
 import { CheckCircleFill } from "react-bootstrap-icons"
 import { productCartValidator } from "../../validators/productCartValidator"
 
@@ -14,8 +14,14 @@ export const CartProductForm = ({product, addProduct}) => {
         <Form>
             {(errors.quantity && touched.quantity) && <p className="alert alert-danger">{errors.quantity}</p>}
             <Field type="hidden" name="productId" />
-            <Field type="number" name="quantity" />
-            <Button variant="success" type="submit"><CheckCircleFill /></Button>
+            <Row>
+                <Col xs="9">
+                    <Field type="number" name="quantity" className="form-control text-center" />
+                </Col>
+                <Col xs="3">
+                    <Button variant="success" type="submit"><CheckCircleFill /></Button>
+                </Col>
+            </Row>
         </Form>
         )}
         </Formik>
