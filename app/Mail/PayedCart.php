@@ -32,6 +32,7 @@ class PayedCart extends Mailable
     public function build()
     {
         $this->to($this->shoppingCart->client->email);
+        $this->cc(config('mail.from.address'));
         $this->subject('Su pedido está en proceso');
         $this->markdown('emails.carts.payed')
         ->with('cart', $this->shoppingCart)
