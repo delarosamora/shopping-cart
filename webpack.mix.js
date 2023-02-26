@@ -19,3 +19,5 @@ mix.js('resources/js/checkout.js', 'public/js')
 
 mix.js('resources/js/menu.js', 'public/js')
     .react().version()
+
+mix.css('resources/css/fonts.css', 'public/css').version()
