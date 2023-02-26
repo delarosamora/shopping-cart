@@ -34,14 +34,20 @@ class ShoppingCartController extends Controller
     }
 
     public function create(SaveShoppingCartRequest $request){
-        $shoppingCart = new ShoppingCart();
-        $shoppingCart->status_id = $request->status_id;
-        $shoppingCart->total = $request->total;
-        $shoppingCart->save();
-
-        $cookie = cookie('cart', $shoppingCart->id, 300);
-
-        return $this->respondWithSuccess(ShoppingCart::with('products')->with('status')->with('client')->findOrFail($shoppingCart->id))->withCookie($cookie);
+        try{
+            $shoppingCart = new ShoppingCart();
+            $shoppingCart->total = $request->total;
+            $shoppingCart->setStatus($request->status_id);
+    
+            $cookie = cookie('cart', $shoppingCart->id, 300);
+    
+            return $this->respondWithSuccess(ShoppingCart::with('products')->with('status')->with('client')->findOrFail($shoppingCart->id))->withCookie($cookie);
+        }catch(TotalCartNotPositiveException $e){
+            return $this->respondError("Por favor añade productos al carrito");
+        }
+        catch(CartWithoutClientException $e){
+            return $this->respondError("Por favor añade un cliente");
+        }
     }
 
     public function setProductQuantity($cartId, SetProductQuantityRequest $request){

@@ -52,12 +52,11 @@ class ShoppingCart extends Model
         $this->status_id = $statusId;
         switch ($statusId){
             case CartStatus::PAYMENT_SUCCESSFUL:
-                if (!$this->client){
-                    throw new CartWithoutClientException();
-                }
-
                 if ($this->total <= 0){
                     throw new TotalCartNotPositiveException();
+                }
+                if (!$this->client){
+                    throw new CartWithoutClientException();
                 }
                 break;
             default:
