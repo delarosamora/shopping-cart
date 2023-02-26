@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Events\CartStatusChangedEvent;
+use App\Exceptions\CartAlreadyPayedException;
 use App\Exceptions\CartWithoutClientException;
 use App\Exceptions\TotalCartNotPositiveException;
 use App\Http\Controllers\Controller;
@@ -61,17 +62,23 @@ class ShoppingCartController extends Controller
         }catch(ModelNotFoundException $e){
             return $this->respondNotFound('Not found');
         }
+        catch(CartAlreadyPayedException $e){
+            return $this->respondError("No puedes añadir productos a un carro ya pagado");
+        }
     }
 
     public function deleteProduct($cartId, DeleteProductFromCartRequest $request){
         try{
             $shoppingCart = ShoppingCart::findOrFail($cartId);
             $product = Product::findOrFail($request->product_id);
-            $shoppingCart->products()->detach($product->id);
+            $shoppingCart->deleteProduct($product);
             $shoppingCart->updateTotalPrice();
             return $this->respondWithSuccess(ShoppingCart::with('products')->with('status')->with('client')->findOrFail($cartId));
         }catch(ModelNotFoundException $e){
             return $this->respondNotFound('Not found');
+        }
+        catch(CartAlreadyPayedException $e){
+            return $this->respondError("No puedes quitar productos de un carro ya pagado");
         }
     }
 

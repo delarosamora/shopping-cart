@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Exceptions\CartAlreadyPayedException;
 use App\Exceptions\CartWithoutClientException;
 use App\Exceptions\TotalCartNotPositiveException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -32,6 +33,9 @@ class ShoppingCart extends Model
     #region SETTER
 
     public function setProductQuantity(Product $product, int $quantity){
+        if ($this->statusIs(CartStatus::PAYMENT_SUCCESSFUL)){
+            throw new CartAlreadyPayedException();
+        }
         ProductShoppingCart::updateOrCreate(
             [
                 'product_id' => $product->id,
@@ -41,6 +45,13 @@ class ShoppingCart extends Model
                 'quantity' => $quantity
             ]
             );
+    }
+
+    public function deleteProduct(Product $product){
+        if ($this->statusIs(CartStatus::PAYMENT_SUCCESSFUL)){
+            throw new CartAlreadyPayedException();
+        }
+        $this->products()->detach($product->id);
     }
 
     public function updateClient(ShoppingCartClient $client){
@@ -84,7 +95,7 @@ class ShoppingCart extends Model
     #region GETTER
 
     public function statusIs($statusId){
-        return $this->status_id = $statusId;
+        return $this->status_id == $statusId;
     }
 
     public function statusIsNot($statusId){
