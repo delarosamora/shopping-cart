@@ -55,7 +55,7 @@ Una vez se indiquen los datos de acceso, se debe ejecutar las migraciones para c
 
 ### 3. Rellenar datos en las tablas
 
-Los datos que se rellenan serán usuarios y categorías de productos. Para ello, se debe ejecutar el siguiente comando:
+Los datos que se rellenan serán estados de carrito y productos. Para ello, se debe ejecutar el siguiente comando:
 
 `php artisan db:seed`
 
