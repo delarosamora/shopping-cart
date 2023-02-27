@@ -28,8 +28,8 @@ class SaveClientRequest extends FormRequest
         return [
             'name' => 'required|string',
             'street' => 'required|string',
-            'number' => 'required|integer',
-            'postal_code' => 'required|integer',
+            'number' => 'required|integer|between:0,99999',
+            'postal_code' => 'required|integer|between:0,99999',
             'city' => 'required|string',
             'province' => 'required|string',
             'country' => 'required|string',
